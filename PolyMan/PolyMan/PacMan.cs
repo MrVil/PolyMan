@@ -14,12 +14,13 @@ namespace PolyMan
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class PacMan : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameState _currentState;
 
-        public Game1()
+        public PacMan()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -34,7 +35,7 @@ namespace PolyMan
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            _currentState = MenuState.getInstance(graphics, spriteBatch);
             base.Initialize();
         }
 
@@ -46,6 +47,7 @@ namespace PolyMan
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            _currentState.LoadContent(Content, spriteBatch);
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,7 +72,17 @@ namespace PolyMan
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                _currentState = new PlayState(graphics, spriteBatch);
+                _currentState.LoadContent(Content, spriteBatch);
+
+            }
+            
+
             // TODO: Add your update logic here
+            _currentState.Update(gameTime);
+
 
             base.Update(gameTime);
         }
@@ -81,9 +93,12 @@ namespace PolyMan
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            _currentState.Draw(gameTime);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
