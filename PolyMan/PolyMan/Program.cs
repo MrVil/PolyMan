@@ -10,7 +10,7 @@ namespace PolyMan
         /// </summary>
         static void Main(string[] args)
         {
-            using (PacMan game = new PacMan())
+            using (GameStateHandler game = new GameStateHandler())
             {
                 game.Run();
             }
