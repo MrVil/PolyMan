@@ -46,7 +46,7 @@ namespace PolyMan.GameStates
             _spriteBatch = spriteBatch;
             _nextGameState = instance;
 
-            _pixelFont = content.Load<SpriteFont>("Pixel");
+            _pixelFont = content.Load<SpriteFont>("font/pixel");
 
             pressEnterSize = _pixelFont.MeasureString(pressEnterString);
             pressEnterCenter = new Vector2(pressEnterSize.X / 2, pressEnterSize.Y / 2);

@@ -9,12 +9,14 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using PolyMan.GameCore;
 
 namespace PolyMan.GameStates
 {
     public class PlayState : GameState
     {
         static PlayState instance;
+        Pacman _pacman;
 
         PlayState(GraphicsDeviceManager graphics)
         {
@@ -22,6 +24,8 @@ namespace PolyMan.GameStates
             _graphics = graphics;
             _nextGameState = this;
             instance = this;
+
+            _pacman = new Pacman();
         }
 
         public static GameState getInstance(GraphicsDeviceManager graphics)
@@ -34,28 +38,35 @@ namespace PolyMan.GameStates
         public override void Initialize()
         {
             _nextGameState = instance;
+
+            _pacman.Initialize();
         }
 
         public override void LoadContent(ContentManager content, SpriteBatch spriteBatch)
         {
             _spriteBatch = spriteBatch;
             _nextGameState = instance;
+
+            _pacman.LoadContent(content, "img/pacman");
+            _pacman.LoadContent(content);
         }
 
         public override void UnloadContent()
         {
-
+            
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
             if (keyboardState.IsKeyDown(Keys.Back))
                 _nextGameState = MenuState.getInstance(_graphics);
+
+            _pacman.Update(gameTime, keyboardState);
         }
 
         public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
-
+            _pacman.Draw(_spriteBatch, gameTime);
         }
     }
 }
