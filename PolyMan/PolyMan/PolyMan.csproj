@@ -76,9 +76,15 @@
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="GameStates\MenuState.cs" />
     <Compile Include="GameStates\PlayState.cs" />
+    <Compile Include="GameCore\Ghost.cs" />
+    <Compile Include="GameCore\Pacman.cs" />
+    <Compile Include="GameCore\Peas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameStateHandler.cs" />
+    <Compile Include="GameCore\Sprite.cs" />
+    <Compile Include="GameCore\Square.cs" />
+    <Compile Include="GameCore\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
