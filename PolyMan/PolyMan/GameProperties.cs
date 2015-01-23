@@ -5,7 +5,33 @@ using System.Text;
 
 namespace PolyMan
 {
-    class GameProperties
+    public class GameProperties
     {
+        byte nbPlayers;
+        uint screenWidth, screenHeight;
+
+        public GameProperties()
+        {
+            nbPlayers = 1;
+            screenWidth = 800;
+            screenHeight = 600;
+        }
+
+        public byte NbPlayers
+        {
+            set { nbPlayers = value; }
+            get { return nbPlayers ; }
+        }
+
+        public uint ScreenWidth
+        {
+            set { screenWidth = value; }
+            get { return screenWidth; }
+        }
+        public uint ScreenHeight
+        {
+            set { screenHeight = value; }
+            get { return screenHeight; }
+        }
     }
 }

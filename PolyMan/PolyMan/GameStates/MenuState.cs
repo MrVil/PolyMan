@@ -40,6 +40,8 @@ namespace PolyMan.GameStates
         public override void LoadContent(ContentManager content, SpriteBatch spriteBatch)
         {
             _spriteBatch = spriteBatch;
+            _nextGameState = instance;
+
             _pixelFont = content.Load<SpriteFont>("Pixel");
         }
 
@@ -48,9 +50,9 @@ namespace PolyMan.GameStates
 
         }
 
-        public override void Update(GameTime gameTime, KeyboardState keyboardState)
+        public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 _nextGameState = PlayState.getInstance(_graphics);
             }
@@ -58,15 +60,12 @@ namespace PolyMan.GameStates
 
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
-           if(_spriteBatch != null)
-                _spriteBatch.DrawString(_pixelFont, "MenuState", new Vector2(0, 0), Color.White);
-        }
 
-        public override GameState nextGameState()
-        {
-            return _nextGameState;
+            Vector2 stringPos = new Vector2(gameProperties.ScreenWidth/2, gameProperties.ScreenHeight/2);
+           if(_spriteBatch != null)
+                _spriteBatch.DrawString(_pixelFont, "Press Enter to play", stringPos, Color.White);
         }
     }
 }

@@ -33,12 +33,13 @@ namespace PolyMan.GameStates
 
         public override void Initialize()
         {
-
+            _nextGameState = instance;
         }
 
         public override void LoadContent(ContentManager content, SpriteBatch spriteBatch)
         {
             _spriteBatch = spriteBatch;
+            _nextGameState = instance;
         }
 
         public override void UnloadContent()
@@ -46,21 +47,15 @@ namespace PolyMan.GameStates
 
         }
 
-        public override void Update(GameTime gameTime, KeyboardState keyboardState)
+        public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
-            if (keyboardState.IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(Keys.Back))
                 _nextGameState = MenuState.getInstance(_graphics);
-
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
 
-        }
-
-        public override GameState nextGameState()
-        {
-            return _nextGameState;
         }
     }
 }

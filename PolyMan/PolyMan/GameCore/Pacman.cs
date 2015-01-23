@@ -14,7 +14,7 @@ namespace PolyMan.GameCore
 {
     class Pacman: Sprite
     {
-        public override virtual void Update(GameTime gameTime, KeyboardState keyboardState)
+        public override void Update(GameTime gameTime, KeyboardState keyboardState)
         {
             if(keyboardState.IsKeyDown(Keys.Up))
             {

@@ -18,16 +18,20 @@ namespace PolyMan.GameStates
         public GraphicsDeviceManager _graphics;
         public GameState _nextGameState;
 
+        public GameState NextGameState
+        {
+            get { return _nextGameState; }
+        }
+
         public abstract void Initialize();
 
         public abstract void LoadContent(ContentManager content, SpriteBatch spriteBatch);
 
         public abstract void UnloadContent();
 
-        public abstract void Update(GameTime gameTime, KeyboardState keyboardState);
+        public abstract void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties);
 
-        public abstract void Draw(GameTime gameTime);
+        public abstract void Draw(GameTime gameTime, GameProperties gameProperties);
 
-        public abstract GameState nextGameState();
     }
 }
