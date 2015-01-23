@@ -16,6 +16,10 @@ namespace PolyMan.GameStates
     {
         static MenuState instance;
         private SpriteFont _pixelFont;
+        private string pressEnterString = "Press Enter to play";
+        Vector2 pressEnterSize;
+        Vector2 pressEnterCenter;
+        Vector2 pressEnterPosition;
 
         MenuState(GraphicsDeviceManager graphics)
         {
@@ -43,6 +47,9 @@ namespace PolyMan.GameStates
             _nextGameState = instance;
 
             _pixelFont = content.Load<SpriteFont>("Pixel");
+
+            pressEnterSize = _pixelFont.MeasureString(pressEnterString);
+            pressEnterCenter = new Vector2(pressEnterSize.X / 2, pressEnterSize.Y / 2);
         }
 
         public override void UnloadContent()
@@ -62,10 +69,9 @@ namespace PolyMan.GameStates
 
         public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
-
-            Vector2 stringPos = new Vector2(gameProperties.ScreenWidth/2, gameProperties.ScreenHeight/2);
+           pressEnterPosition = new Vector2(gameProperties.ScreenWidth / 2 - pressEnterCenter.X, gameProperties.ScreenHeight / 2 - pressEnterCenter.Y);
            if(_spriteBatch != null)
-                _spriteBatch.DrawString(_pixelFont, "Press Enter to play", stringPos, Color.White);
+                _spriteBatch.DrawString(_pixelFont, pressEnterString, pressEnterPosition, Color.White);
         }
     }
 }
