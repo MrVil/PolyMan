@@ -61,7 +61,7 @@ namespace PolyMan.GameStates
             if (keyboardState.IsKeyDown(Keys.Back))
                 _nextGameState = MenuState.getInstance(_graphics);
 
-            _pacman.Update(gameTime, keyboardState);
+            _pacman.Update(gameTime, keyboardState, gameProperties);
         }
 
         public override void Draw(GameTime gameTime, GameProperties gameProperties)

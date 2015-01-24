@@ -15,7 +15,7 @@ namespace PolyMan.GameCore
     class Sprite
     {
         protected Texture2D _texture;
-        protected double time;
+        protected double timerUpdate;
         protected Vector2 _position;
         protected Vector2 _velocity;
 
@@ -42,7 +42,7 @@ namespace PolyMan.GameCore
 
             _position = Vector2.Zero;
             _velocity = Vector2.Zero;
-            time = tmpTime = 0;
+            timerUpdate = 0;
         }
 
         public virtual void LoadContent(ContentManager content, string assetName)
@@ -50,7 +50,7 @@ namespace PolyMan.GameCore
             _texture = content.Load<Texture2D>(assetName);
         }
 
-        public virtual void Update(GameTime gameTime, KeyboardState keyboardState)
+        public virtual void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gp)
         {
 
         }
