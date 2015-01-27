@@ -14,7 +14,7 @@ namespace PolyMan
         {
             nbPlayers = 1;
             screenWidth = 800;
-            screenHeight = 600;
+            screenHeight = 620;
         }
 
         public byte NbPlayers

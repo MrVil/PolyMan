@@ -12,13 +12,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PolyMan.GameCore
 {
-    class Pacman: Sprite
+    class Pacman: SpriteDynamic
     {
         Texture2D _textureRight, _textureLeft,_textureDown, _textureUp;
         Texture2D _textureRight2, _textureLeft2, _textureDown2, _textureUp2;
         double timerAnimation = 0;
 
-        public void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             _textureRight = content.Load<Texture2D>("img/pacman");
             _textureLeft = content.Load<Texture2D>("img/pacman_2");

@@ -13,11 +13,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PolyMan.GameCore
 {
-    class Peas: Sprite
+    class SuperPeas : Sprite
     {
         public override void LoadContent(ContentManager content)
         {
-            LoadContent(content, "img/bean");
+            LoadContent(content, "img/pouvoir");
         }
     }
 }
