@@ -10,14 +10,25 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-
 namespace PolyMan.GameCore
 {
-    class SuperPeas : Sprite
+    public abstract class SpriteDynamic : Sprite
     {
-        public override void LoadContent(ContentManager content)
+        protected Vector2 _velocity;
+        protected double timerUpdate;
+
+        public Vector2 Velocity
         {
-            LoadContent(content, "img/gros_bean");
+            get { return _velocity; }
+            set { _velocity = value; }
         }
+
+        public virtual void Initialize()
+        {
+            _velocity = Vector2.Zero;
+            timerUpdate = 0;
+            base.Initialize();
+        }
+
     }
 }

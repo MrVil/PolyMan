@@ -49,7 +49,7 @@ namespace PolyMan.GameStates
 
         public override void UnloadContent()
         {
-            
+            instance = null;
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
