@@ -49,7 +49,7 @@ namespace PolyMan.GameCore
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            if(_texture != null)
+            if (_texture != null)
                 spriteBatch.Draw(_texture, _position, Color.White);
         }
 

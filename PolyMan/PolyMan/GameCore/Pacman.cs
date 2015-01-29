@@ -19,20 +19,27 @@ namespace PolyMan.GameCore
         Texture2D _textureRight2, _textureLeft2, _textureDown2, _textureUp2;
         Texture2D _textureDead, _textureDead2, _textureDead3, _textureDead4;
 
-        double timerAnimation = 0;
+        SoundEffect _peasEat1, _peasEat2, _currentSE;
 
-        ContentManager _content;
+        double timerAnimation = 0;
+        int nbPeasEat;
+        int _speed = 10;
 
         public Pacman()
             : base()
         {
             Position = Maze.convertMatrixToPix(new Vector2(14, 23));
-            //Velocity = new Vector2(-1, 0);
+            Velocity = new Vector2(-1, 0);
+            nbPeasEat = 0;
+        }
+
+        public int NbPeasEat
+        {
+            get { return nbPeasEat; }
         }
 
         public override void LoadContent(ContentManager content)
         {
-            _content = content;
 
             _textureRight = content.Load<Texture2D>("img/pacman");
             _textureLeft = content.Load<Texture2D>("img/pacman_2");
@@ -49,14 +56,19 @@ namespace PolyMan.GameCore
             _textureDead3 = content.Load<Texture2D>("img/Mort2");
             _textureDead4 = content.Load<Texture2D>("img/Mort3");
 
-            Texture = _textureDead;
+            _peasEat1 = content.Load<SoundEffect>("sound/PelletEat1");
+            _peasEat2 = content.Load<SoundEffect>("sound/PelletEat2");
+
+            _currentSE = _peasEat1;
+
+            Texture = _textureLeft;
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gp)
         {
             timerUpdate += gameTime.ElapsedGameTime.TotalMilliseconds;
             timerAnimation += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (timerUpdate < 10)
+            if (timerUpdate < _speed)
                 return;
 
             Velocity = nextStepVelocity(gameTime, keyboardState, gp);
@@ -71,7 +83,7 @@ namespace PolyMan.GameCore
                     _texture = _textureUp2;
                 else if (_texture == _textureUp2)
                     _texture = _textureUp;
-                else if (_texture == _textureLeft)
+                else if (_texture == _textureLeft)                
                     _texture = _textureLeft2;
                 else if (_texture == _textureLeft2)
                     _texture = _textureLeft;
@@ -125,8 +137,23 @@ namespace PolyMan.GameCore
             position = Vector2.Add(position, velocity);
             positionMaze = Maze.convertPixToMatrix(position);
 
-            positionMaze.X = (float)Math.Round(positionMaze.X);
-            positionMaze.Y = (float)Math.Round(positionMaze.Y);
+            if(velocity.X == -1){
+                positionMaze.X = (float)Math.Floor(positionMaze.X);
+            }
+            else if (velocity.X == 1){
+                positionMaze.X = (float)Math.Ceiling(positionMaze.X);
+            }
+            else
+                positionMaze.X = (float)Math.Round(positionMaze.X);
+            
+            if(velocity.Y == -1){
+                positionMaze.Y = (float)Math.Floor(positionMaze.Y);
+            }
+            else if (velocity.Y == 1) { 
+                positionMaze.Y = (float)Math.Ceiling(positionMaze.Y);
+            }
+            else
+                positionMaze.Y = (float)Math.Round(positionMaze.Y);
 
             try {
                 if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Wall || maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Gate){
@@ -134,7 +161,18 @@ namespace PolyMan.GameCore
                 }
                 else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Peas) {
                     gp.Score += 10;
+                    nbPeasEat++;
                     maze.Array[(int)positionMaze.Y, (int)positionMaze.X] = new Empty();
+                    _currentSE.Play();
+                    _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
+                }
+                else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is SuperPeas)
+                {
+                    gp.Score += 50;
+                    nbPeasEat++;
+                    maze.Array[(int)positionMaze.Y, (int)positionMaze.X] = new Empty();
+                    _currentSE.Play();
+                    _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
                 }
 
             }

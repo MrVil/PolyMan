@@ -17,7 +17,7 @@ namespace PolyMan.GameStates
     {
         static PlayState instance;
         public static Maze maze;
-        public Pacman pacman;
+        public List<SpriteDynamic> entities;
         private SpriteFont _pixelFont;
 
         PlayState(GraphicsDeviceManager graphics)
@@ -27,7 +27,10 @@ namespace PolyMan.GameStates
             _nextGameState = this;
             instance = this;
             maze = new Maze();
-            pacman = new Pacman();
+            entities = new List<SpriteDynamic>();
+            entities.Add(new Pacman());
+            for (int i = 0; i < 4; i++)
+                entities.Add(new Ghost());
         }
 
         public static GameState getInstance(GraphicsDeviceManager graphics)
@@ -41,7 +44,8 @@ namespace PolyMan.GameStates
         {
             _nextGameState = instance;
             maze.Initialize();
-            pacman.Initialize();
+            foreach(SpriteDynamic sd in entities)
+                sd.Initialize();
         }
 
         public override void LoadContent(ContentManager content, SpriteBatch spriteBatch)
@@ -50,7 +54,8 @@ namespace PolyMan.GameStates
             _nextGameState = instance;
             _pixelFont = content.Load<SpriteFont>("font/pixel");
             maze.LoadContent(content);
-            pacman.LoadContent(content);
+            foreach (SpriteDynamic sd in entities)
+                sd.LoadContent(content);
         }
 
         public override void UnloadContent()
@@ -60,16 +65,20 @@ namespace PolyMan.GameStates
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
-            if (keyboardState.IsKeyDown(Keys.Back))
+            Pacman pacman = (Pacman)entities[0];
+            if (keyboardState.IsKeyDown(Keys.Back) || (pacman.NbPeasEat >= 294))
                 _nextGameState = MenuState.getInstance(_graphics);
 
-            pacman.Update(gameTime, keyboardState, gameProperties);
+            foreach (SpriteDynamic sd in entities)
+                sd.Update(gameTime, keyboardState, gameProperties);
         }
 
         public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
             maze.Draw(_spriteBatch, gameTime);
-            pacman.Draw(_spriteBatch, gameTime);
+            foreach (SpriteDynamic sd in entities)
+                sd.Draw(_spriteBatch, gameTime);
+
             string score = gameProperties.Score.ToString();
             _spriteBatch.DrawString(_pixelFont, "Score : "+score, new Vector2(50, 20), Color.White);
         }
