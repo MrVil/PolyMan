@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameCore\Food.cs" />
     <Compile Include="GameCore\Gate.cs" />
     <Compile Include="GameCore\SpriteDynamic.cs" />
     <Compile Include="GameCore\Empty.cs" />

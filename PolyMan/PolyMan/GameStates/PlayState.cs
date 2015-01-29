@@ -19,6 +19,8 @@ namespace PolyMan.GameStates
         public static Maze maze;
         public List<SpriteDynamic> entities;
         private SpriteFont _pixelFont;
+        private double timer_bonus = 0;
+        ContentManager _content;
 
         PlayState(GraphicsDeviceManager graphics)
         {
@@ -52,6 +54,7 @@ namespace PolyMan.GameStates
         {
             _spriteBatch = spriteBatch;
             _nextGameState = instance;
+            _content = content;
             _pixelFont = content.Load<SpriteFont>("font/pixel");
             maze.LoadContent(content);
             foreach (SpriteDynamic sd in entities)
@@ -71,6 +74,17 @@ namespace PolyMan.GameStates
 
             foreach (SpriteDynamic sd in entities)
                 sd.Update(gameTime, keyboardState, gameProperties);
+
+            timer_bonus += gameTime.ElapsedGameTime.TotalSeconds;
+            
+            if (timer_bonus > 4.0)
+            {
+                Food orange = new Food();
+                orange.LoadContent(_content);
+                maze.Array[13, 17] = orange;
+                orange.Position = Maze.convertMatrixToPix(new Vector2(13, 17));
+            }
+
         }
 
         public override void Draw(GameTime gameTime, GameProperties gameProperties)
