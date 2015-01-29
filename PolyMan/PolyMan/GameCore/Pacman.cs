@@ -61,6 +61,14 @@ namespace PolyMan.GameCore
 
             _currentSE = _peasEat1;
 
+            SoundEffectInstance inst1 = _peasEat1.CreateInstance();
+            SoundEffectInstance inst2 = _peasEat2.CreateInstance();
+            SoundEffectInstance inst3 = _currentSE.CreateInstance();
+            inst1.Volume = 0;
+            inst2.Volume = 0;
+            inst3.Volume = 0;
+
+
             Texture = _textureLeft;
         }
 
@@ -156,24 +164,30 @@ namespace PolyMan.GameCore
                 positionMaze.Y = (float)Math.Round(positionMaze.Y);
 
             try {
-                if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Wall || maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Gate){
+                if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Wall || maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Gate)
+                {
                     velocity = Vector2.Zero;
                 }
-                else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Peas) {
-                    gp.Score += 10;
+                else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Peas)
+                {
+                    gp.Score += 30;
                     nbPeasEat++;
                     maze.Array[(int)positionMaze.Y, (int)positionMaze.X] = new Empty();
                     _currentSE.Play();
                     _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
+                    _speed = 50;
                 }
                 else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is SuperPeas)
                 {
-                    gp.Score += 50;
+                    gp.Score += 30;
                     nbPeasEat++;
                     maze.Array[(int)positionMaze.Y, (int)positionMaze.X] = new Empty();
                     _currentSE.Play();
                     _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
+                    _speed = 50;
                 }
+                else
+                    _speed = 6;
 
             }
             catch(Exception e){

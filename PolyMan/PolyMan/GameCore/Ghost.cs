@@ -35,6 +35,12 @@ namespace PolyMan.GameCore
             
         }
 
+        public override void Initialize(){
+            /*for (int i = 0; i < Maze.Height; i++)
+                for (int j = 0; j < Maze.Width; j++)
+                    if(Maze.Array[])*/
+        }
+
         public override void LoadContent(ContentManager content)
         {
             switch (idGhost)

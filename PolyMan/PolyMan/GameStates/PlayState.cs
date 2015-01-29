@@ -19,6 +19,7 @@ namespace PolyMan.GameStates
         public static Maze maze;
         public List<SpriteDynamic> entities;
         private SpriteFont _pixelFont;
+        private Song _music;
 
         PlayState(GraphicsDeviceManager graphics)
         {
@@ -53,9 +54,12 @@ namespace PolyMan.GameStates
             _spriteBatch = spriteBatch;
             _nextGameState = instance;
             _pixelFont = content.Load<SpriteFont>("font/pixel");
+            _music = content.Load<Song>("sound/DJ Okawari - Flower Dance - 2010"); 
             maze.LoadContent(content);
             foreach (SpriteDynamic sd in entities)
                 sd.LoadContent(content);
+
+            MediaPlayer.Play(_music);
         }
 
         public override void UnloadContent()
