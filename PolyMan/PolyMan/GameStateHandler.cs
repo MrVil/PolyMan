@@ -31,8 +31,8 @@ namespace PolyMan
             graphics.PreferredBackBufferWidth = (int)_gameProperties.ScreenWidth;
             graphics.PreferredBackBufferHeight = (int)_gameProperties.ScreenHeight;
 
-            /*graphics.SynchronizeWithVerticalRetrace = false;
-        	IsFixedTimeStep = false;*/
+            graphics.SynchronizeWithVerticalRetrace = false;
+        	IsFixedTimeStep = false;
 
         }
 

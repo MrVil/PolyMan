@@ -9,12 +9,17 @@ namespace PolyMan
     {
         byte nbPlayers;
         uint screenWidth, screenHeight;
+        uint gameAreaWidth, gameAreaHeight;
+        uint score;
 
         public GameProperties()
         {
             nbPlayers = 1;
             screenWidth = 800;
             screenHeight = 620;
+            gameAreaWidth = 28*20; //nbColumn * sprite width
+            gameAreaHeight = 31*20; //nbLine * sprite height
+            score = 0;
         }
 
         public byte NbPlayers
@@ -32,6 +37,23 @@ namespace PolyMan
         {
             set { screenHeight = value; }
             get { return screenHeight; }
+        }
+
+        public uint GameAreaWidth
+        {
+            set { gameAreaWidth = value; }
+            get { return gameAreaWidth; }
+        }
+        public uint GameAreaHeight
+        {
+            set { gameAreaHeight = value; }
+            get { return gameAreaHeight; }
+        }
+
+        public uint Score
+        {
+            set { score = value; }
+            get { return score; }
         }
     }
 }
