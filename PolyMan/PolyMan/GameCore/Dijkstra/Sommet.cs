@@ -11,12 +11,14 @@ namespace PolyMan.GameCore.Dijkstra
         public int Potentiel;
         public bool Marque;
         public Coord Suivant;
+        public Sommet Pred;
 
         public Sommet()
         {
             Potentiel = INFINI;
             Marque = false;
             Suivant = null;
+            Pred = null;
         }
     }
 }

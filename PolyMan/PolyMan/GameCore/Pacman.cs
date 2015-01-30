@@ -104,7 +104,7 @@ namespace PolyMan.GameCore
             }
 
             _position = Vector2.Add(_position, _velocity);
-            _position.X = 240 + (_position.X+gp.GameAreaWidth - 240) % (gp.GameAreaWidth);
+            _position.X = Maze.xmargin + (_position.X+gp.GameAreaWidth - Maze.xmargin) % (gp.GameAreaWidth);
             _position.Y = (_position.Y+gp.GameAreaHeight) % gp.GameAreaHeight;
 
             timerUpdate = 0;
@@ -170,16 +170,17 @@ namespace PolyMan.GameCore
                 }
                 else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Peas)
                 {
-                    gp.Score += 30;
+                    gp.Score += 60;
                     nbPeasEat++;
                     maze.Array[(int)positionMaze.Y, (int)positionMaze.X] = new Empty();
                     _currentSE.Play();
                     _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
                     _speed = 50;
                 }
+
                 else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is SuperPeas)
                 {
-                    gp.Score += 30;
+                    gp.Score += 60;
                     nbPeasEat++;
                     maze.Array[(int)positionMaze.Y, (int)positionMaze.X] = new Empty();
                     _currentSE.Play();

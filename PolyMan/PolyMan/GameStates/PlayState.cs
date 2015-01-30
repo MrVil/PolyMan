@@ -63,7 +63,7 @@ namespace PolyMan.GameStates
             foreach (SpriteDynamic sd in entities)
                 sd.LoadContent(content);
 
-            //MediaPlayer.Play(_music);
+            MediaPlayer.Play(_music);
         }
 
         public override void UnloadContent()
@@ -85,7 +85,7 @@ namespace PolyMan.GameStates
 
             foreach (SpriteDynamic sd in entities)
                 sd.Update(gameTime, keyboardState, gameProperties);
-           
+
             if (timerBonus >= 0) 
                 timerBonus += gameTime.ElapsedGameTime.TotalSeconds;
             
@@ -94,10 +94,12 @@ namespace PolyMan.GameStates
             {
                 Food orange = new Food();
                 orange.LoadContent(_content);
-                maze.Array[17, 13] = orange;
+                maze.Array[13, 17] = orange;
                 orange.Position = Maze.convertMatrixToPix(new Vector2(13, 17));
-                timerBonus = -1;
             }
+
+            foreach (SpriteDynamic sd in entities)
+                sd.Update(gameTime, keyboardState, gameProperties);
 
             oldKbState = keyboardState;
         }
@@ -115,6 +117,11 @@ namespace PolyMan.GameStates
         public static Maze getMaze()
         {
             return maze;
+        }
+
+        public static Pacman getPacman()
+        {
+            return (Pacman)entities[0];
         }
 
         public static List<SpriteDynamic> getEntities()
