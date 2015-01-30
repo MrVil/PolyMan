@@ -13,9 +13,9 @@ using PolyMan.GameCore;
 
 namespace PolyMan.GameStates
 {
-    public class PlayState : GameState
+    class PauseState : GameState
     {
-        static PlayState instance;
+        static PauseState instance;
         public static Maze maze;
         public static List<SpriteDynamic> entities;
         private SpriteFont _pixelFont;
@@ -24,32 +24,31 @@ namespace PolyMan.GameStates
         private Song _music;
         private KeyboardState oldKbState;
 
-        PlayState(GraphicsDeviceManager graphics)
+        PauseState(GraphicsDeviceManager graphics)
         {
             _spriteBatch = null;
             _graphics = graphics;
             _nextGameState = this;
             instance = this;
             maze = new Maze();
-            entities = new List<SpriteDynamic>();
-            entities.Add(new Pacman());
-            for (int i = 0; i < 4; i++)
-                entities.Add(new Ghost());
+
         }
 
         public static GameState getInstance(GraphicsDeviceManager graphics)
         {
             if (instance == null)
-                instance = new PlayState(graphics);
+                instance = new PauseState(graphics);
             return instance;
         }
 
         public override void Initialize()
         {
             _nextGameState = instance;
-            maze.Initialize();
-            foreach(SpriteDynamic sd in entities)
-                sd.Initialize();
+            maze = PlayState.getMaze();
+            entities = PlayState.getEntities();
+            if (entities == null)
+                Console.WriteLine("ça chie");
+ 
         }
 
         public override void LoadContent(ContentManager content, SpriteBatch spriteBatch)
@@ -58,12 +57,6 @@ namespace PolyMan.GameStates
             _nextGameState = instance;
             _content = content;
             _pixelFont = content.Load<SpriteFont>("font/pixel");
-            _music = content.Load<Song>("sound/DJ Okawari - Flower Dance - 2010"); 
-            maze.LoadContent(content);
-            foreach (SpriteDynamic sd in entities)
-                sd.LoadContent(content);
-
-            //MediaPlayer.Play(_music);
         }
 
         public override void UnloadContent()
@@ -73,53 +66,25 @@ namespace PolyMan.GameStates
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
-            Pacman pacman = (Pacman)entities[0];
-            Console.WriteLine(pacman.NbPeasEat);
-            if (pacman.NbPeasEat >= 50)
-                _nextGameState = WinState.getInstance(_graphics);
-
             if (keyboardState.IsKeyDown(Keys.Space)&& oldKbState.IsKeyUp(Keys.Space))
-            {
-                _nextGameState = PauseState.getInstance(_graphics);
-            }
-
-            foreach (SpriteDynamic sd in entities)
-                sd.Update(gameTime, keyboardState, gameProperties);
-           
-            if (timerBonus >= 0) 
-                timerBonus += gameTime.ElapsedGameTime.TotalSeconds;
-            
-
-            if (timerBonus > 4.0)
-            {
-                Food orange = new Food();
-                orange.LoadContent(_content);
-                maze.Array[17, 13] = orange;
-                orange.Position = Maze.convertMatrixToPix(new Vector2(13, 17));
-                timerBonus = -1;
-            }
+                _nextGameState = PlayState.getInstance(_graphics);
 
             oldKbState = keyboardState;
         }
 
+
         public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
             maze.Draw(_spriteBatch, gameTime);
-            foreach (SpriteDynamic sd in entities)
-                sd.Draw(_spriteBatch, gameTime);
+            if(entities != null)
+                foreach (SpriteDynamic sd in entities)
+                    sd.Draw(_spriteBatch, gameTime);
 
             string score = gameProperties.Score.ToString();
-            _spriteBatch.DrawString(_pixelFont, "Score : "+score, new Vector2(50, 20), Color.White);
+            _spriteBatch.DrawString(_pixelFont, "Score : " + score, new Vector2(50, 20), Color.White);
+            string _stringPause = "PAUSE \n Press Spacebar to resume game";
+            _spriteBatch.DrawString(_pixelFont, _stringPause, new Vector2(50, 20), Color.White);
         }
 
-        public static Maze getMaze()
-        {
-            return maze;
-        }
-
-        public static List<SpriteDynamic> getEntities()
-        {
-            return entities;
-        }
     }
 }

@@ -186,8 +186,6 @@ namespace PolyMan.GameCore
                     _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
                     _speed = 50;
                 }
-                else
-                    _speed = 6;
 
                 else if (maze.Array[(int)positionMaze.Y, (int)positionMaze.X] is Food)
                 {
@@ -197,6 +195,9 @@ namespace PolyMan.GameCore
                     _currentSE.Play();
                     _currentSE = (_currentSE == _peasEat2) ? _peasEat1 : _peasEat2;
                 }
+
+                else
+                    _speed = 6;
 
             }
             catch(Exception e){

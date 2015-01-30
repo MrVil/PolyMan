@@ -81,12 +81,15 @@
     <Compile Include="GameCore\Maze.cs" />
     <Compile Include="GameCore\SuperPeas.cs" />
     <Compile Include="GameProperties.cs" />
+    <Compile Include="GameStates\DeathState.cs" />
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="GameStates\MenuState.cs" />
+    <Compile Include="GameStates\PauseState.cs" />
     <Compile Include="GameStates\PlayState.cs" />
     <Compile Include="GameCore\Ghost.cs" />
     <Compile Include="GameCore\Pacman.cs" />
     <Compile Include="GameCore\Peas.cs" />
+    <Compile Include="GameStates\WinState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameStateHandler.cs" />

@@ -61,7 +61,6 @@ namespace PolyMan
             _keyboardState = Keyboard.GetState();
             _currentState.Update(gameTime, _keyboardState, _gameProperties);
             if (_currentState != _currentState.NextGameState) { 
-                _currentState.UnloadContent();
                 _currentState = _currentState.NextGameState;
                 _currentState.LoadContent(Content, spriteBatch);
             }
