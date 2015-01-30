@@ -17,9 +17,9 @@ namespace PolyMan.GameStates
     {
         static PlayState instance;
         public static Maze maze;
-        public List<SpriteDynamic> entities;
+        public static List<SpriteDynamic> entities;
         private SpriteFont _pixelFont;
-        private double timer_bonus = 0;
+        private double timerBonus = 0;
         ContentManager _content;
         private Song _music;
 
@@ -73,21 +73,23 @@ namespace PolyMan.GameStates
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
             Pacman pacman = (Pacman)entities[0];
-            if (keyboardState.IsKeyDown(Keys.Back) || (pacman.NbPeasEat >= 294))
+            if (keyboardState.IsKeyDown(Keys.Back) || (pacman.NbPeasEat >= 298))
                 _nextGameState = MenuState.getInstance(_graphics);
 
-            foreach (SpriteDynamic sd in entities)
-                sd.Update(gameTime, keyboardState, gameProperties);
-
-            timer_bonus += gameTime.ElapsedGameTime.TotalSeconds;
+            if(timerBonus >= 0)
+                timerBonus += gameTime.ElapsedGameTime.TotalSeconds;
             
-            if (timer_bonus > 4.0)
+            if (timerBonus > 10)
             {
                 Food orange = new Food();
                 orange.LoadContent(_content);
-                maze.Array[13, 17] = orange;
+                maze.Array[17, 13] = orange;
                 orange.Position = Maze.convertMatrixToPix(new Vector2(13, 17));
+                timerBonus = -1;
             }
+
+            foreach (SpriteDynamic sd in entities)
+                sd.Update(gameTime, keyboardState, gameProperties);
 
         }
 
@@ -99,11 +101,18 @@ namespace PolyMan.GameStates
 
             string score = gameProperties.Score.ToString();
             _spriteBatch.DrawString(_pixelFont, "Score : "+score, new Vector2(50, 20), Color.White);
+
+
         }
 
         public static Maze getMaze()
         {
             return maze;
+        }
+
+        public static Pacman getPacman()
+        {
+            return (Pacman)entities[0];
         }
     }
 }

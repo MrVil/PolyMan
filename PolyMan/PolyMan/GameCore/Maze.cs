@@ -17,7 +17,7 @@ namespace PolyMan.GameCore
         private Sprite[,] array;
         private const uint width = 28;
         private const uint height = 31;
-        private static int xmargin = 240, ymargin = 0;
+        public static int xmargin = 240, ymargin = 0;
 
         public Maze()
         {

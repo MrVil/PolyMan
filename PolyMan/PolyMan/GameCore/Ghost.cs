@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using PolyMan.GameStates;
+using PolyMan.GameCore.Dijkstra;
 
 namespace PolyMan.GameCore
 {
@@ -17,6 +19,7 @@ namespace PolyMan.GameCore
         private byte idGhost;
         private static byte nbGhost = 0;
         Texture2D fear0, fear1;
+        Sommet[,] sommets;
 
         public Ghost() : base()
         {
@@ -32,14 +35,21 @@ namespace PolyMan.GameCore
                 default: Console.WriteLine("Error, too much ghost"); break;
             }
 
-            
+            Maze maze = PlayState.getMaze();
+            sommets = new Sommet[maze.Height, maze.Width];
         }
 
         public override void Initialize(){
-            /*for (int i = 0; i < Maze.Height; i++)
-                for (int j = 0; j < Maze.Width; j++)
-                    if(Maze.Array[])*/
+            Maze maze = PlayState.getMaze();
+            for (int i = 0; i < maze.Height; i++)
+                for (int j = 0; j < maze.Width; j++)
+                    if (! (maze.Array[i, j] is Wall))
+                    {
+                        sommets[i,j] = new Sommet(); 
+                    }
         }
+
+
 
         public override void LoadContent(ContentManager content)
         {
@@ -55,6 +65,53 @@ namespace PolyMan.GameCore
             fear0 = content.Load<Texture2D>("img/FantomePeur0");
             fear1 = content.Load<Texture2D>("img/FantomePeur1");
 
+        }
+
+        public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gp)
+        {
+            Sommet arrive, courant, depart;
+            Vector2 currentPos = Maze.convertPixToMatrix(Position);
+            Vector2 pacmanPos = Maze.convertPixToMatrix(PlayState.getPacman().Position);
+            int y = (int)Math.Floor(pacmanPos.Y);
+            int x = (int)Math.Floor(pacmanPos.X);
+            arrive = sommets[y, x];
+            depart = sommets[(int)Math.Floor(currentPos.Y), (int)Math.Floor(currentPos.X)];
+            courant = arrive;
+            courant.Potentiel = 0;
+            int minimum = 0;
+            Maze maze = PlayState.getMaze();
+
+            while (courant != depart)
+            {
+                Sommet z = courant;
+                z.Marque = true;
+                try
+                {
+                    if (sommets[y + 1, x] != null)
+                    {
+                        Sommet s = sommets[y, x];
+                        if (s.Potentiel > z.Potentiel + 1)
+                            s.Pred = courant;
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
+                minimum = Sommet.INFINI;
+            }
+
+            for (int i = 0; i < maze.Height; i++)
+                for (int j = 0; j < maze.Width; j++)
+                {
+                    if (!((sommets[i, j].Marque) || sommets[i, j].Potentiel < minimum))
+                    {
+                        minimum = sommets[i, j].Potentiel;
+                        courant = sommets[i, j];
+                    }
+                }
+
+            base.Update(gameTime, keyboardState, gp);
         }
 
     }
