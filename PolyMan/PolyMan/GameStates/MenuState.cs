@@ -16,6 +16,10 @@ namespace PolyMan.GameStates
     {
         static MenuState instance;
         private SpriteFont _pixelFont;
+        private string pressEnterString = "Press Enter to play";
+        Vector2 pressEnterSize;
+        Vector2 pressEnterCenter;
+        Vector2 pressEnterPosition;
 
         MenuState(GraphicsDeviceManager graphics)
         {
@@ -40,7 +44,12 @@ namespace PolyMan.GameStates
         public override void LoadContent(ContentManager content, SpriteBatch spriteBatch)
         {
             _spriteBatch = spriteBatch;
-            _pixelFont = content.Load<SpriteFont>("Pixel");
+            _nextGameState = instance;
+
+            _pixelFont = content.Load<SpriteFont>("font/pixel");
+
+            pressEnterSize = _pixelFont.MeasureString(pressEnterString);
+            pressEnterCenter = new Vector2(pressEnterSize.X / 2, pressEnterSize.Y / 2);
         }
 
         public override void UnloadContent()
@@ -48,9 +57,9 @@ namespace PolyMan.GameStates
 
         }
 
-        public override void Update(GameTime gameTime, KeyboardState keyboardState)
+        public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 _nextGameState = PlayState.getInstance(_graphics);
             }
@@ -58,15 +67,11 @@ namespace PolyMan.GameStates
 
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
+           pressEnterPosition = new Vector2(gameProperties.ScreenWidth / 2 - pressEnterCenter.X, gameProperties.ScreenHeight / 2 - pressEnterCenter.Y);
            if(_spriteBatch != null)
-                _spriteBatch.DrawString(_pixelFont, "MenuState", new Vector2(0, 0), Color.White);
-        }
-
-        public override GameState nextGameState()
-        {
-            return _nextGameState;
+                _spriteBatch.DrawString(_pixelFont, pressEnterString, pressEnterPosition, Color.White);
         }
     }
 }

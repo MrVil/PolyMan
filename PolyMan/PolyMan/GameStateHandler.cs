@@ -19,17 +19,25 @@ namespace PolyMan
         SpriteBatch spriteBatch;
         GameState _currentState;
         KeyboardState _keyboardState;
+        GameProperties _gameProperties;
 
         public GameStateHandler()
         {
             graphics = new GraphicsDeviceManager(this);
+            _currentState = MenuState.getInstance(graphics);
+            _gameProperties = new GameProperties();
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = (int)_gameProperties.ScreenWidth;
+            graphics.PreferredBackBufferHeight = (int)_gameProperties.ScreenHeight;
+
+            graphics.SynchronizeWithVerticalRetrace = false;
+        	IsFixedTimeStep = false;
+
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            _currentState = MenuState.getInstance(graphics);
             _currentState.Initialize();
             base.Initialize();
         }
@@ -51,10 +59,10 @@ namespace PolyMan
                 this.Exit();
 
             _keyboardState = Keyboard.GetState();
-            _currentState.Update(gameTime, _keyboardState);
-            if (_currentState != _currentState.nextGameState()) { 
+            _currentState.Update(gameTime, _keyboardState, _gameProperties);
+            if (_currentState != _currentState.NextGameState) { 
                 _currentState.UnloadContent();
-                _currentState = _currentState.nextGameState();
+                _currentState = _currentState.NextGameState;
                 _currentState.LoadContent(Content, spriteBatch);
             }
 
@@ -66,7 +74,7 @@ namespace PolyMan
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            _currentState.Draw(gameTime);
+            _currentState.Draw(gameTime, _gameProperties);
             spriteBatch.End();
 
             base.Draw(gameTime);

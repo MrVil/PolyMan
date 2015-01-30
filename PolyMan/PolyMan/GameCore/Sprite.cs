@@ -12,9 +12,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PolyMan.GameCore
 {
-    class Sprite
+    public abstract class Sprite
     {
         protected Texture2D _texture;
+        protected Vector2 _position;
 
         public Texture2D Texture
         {
@@ -22,27 +23,15 @@ namespace PolyMan.GameCore
             set { _texture = value; }
         }
 
-        protected Vector2 _position;
-
         public Vector2 Position
         {
             get { return _position; }
             set { _position = value; }
         }
 
-        protected Vector2 _velocity;
-
-        public Vector2 Velocity
-        {
-            get { return _velocity; }
-            set { _velocity = value; }
-        }
-
         public virtual void Initialize()
         {
-
             _position = Vector2.Zero;
-            _velocity = Vector2.Zero;
         }
 
         public virtual void LoadContent(ContentManager content, string assetName)
@@ -50,15 +39,18 @@ namespace PolyMan.GameCore
             _texture = content.Load<Texture2D>(assetName);
         }
 
-        public virtual void Update(GameTime gameTime, KeyboardState keyboardState)
+        public abstract void LoadContent(ContentManager content);
+
+        public virtual void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gp)
         {
-            _position += _velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
         }
 
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(_texture, _position, Color.White);
+            if (_texture != null)
+                spriteBatch.Draw(_texture, _position, Color.White);
         }
 
     }
