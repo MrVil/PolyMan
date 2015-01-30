@@ -91,6 +91,16 @@ namespace PolyMan.GameCore
             get { return array; }
         }
 
+        public uint Height
+        {
+            get { return height; }
+        }
+
+        public uint Width
+        {
+            get { return width; }
+        }
+
         public void Initialize()
         {
             for (int i = 0; i < height; i++)

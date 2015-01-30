@@ -73,6 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameCore\Food.cs" />
+    <Compile Include="GameCore\Dijkstra\Coord.cs" />
+    <Compile Include="GameCore\Dijkstra\Sommet.cs" />
     <Compile Include="GameCore\Gate.cs" />
     <Compile Include="GameCore\SpriteDynamic.cs" />
     <Compile Include="GameCore\Empty.cs" />
