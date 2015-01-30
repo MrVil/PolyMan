@@ -62,6 +62,7 @@ namespace PolyMan
             _currentState.Update(gameTime, _keyboardState, _gameProperties);
             if (_currentState != _currentState.NextGameState) { 
                 _currentState = _currentState.NextGameState;
+                _currentState.Initialize();
                 _currentState.LoadContent(Content, spriteBatch);
             }
 

@@ -29,13 +29,14 @@ namespace PolyMan.GameCore
             : base()
         {
             Position = Maze.convertMatrixToPix(new Vector2(14, 23));
-            Velocity = new Vector2(-1, 0);
             nbPeasEat = 0;
+            Velocity = new Vector2(-1, 0);
         }
 
         public int NbPeasEat
         {
             get { return nbPeasEat; }
+            set { nbPeasEat = value;}
         }
 
         public override void LoadContent(ContentManager content)
@@ -81,7 +82,7 @@ namespace PolyMan.GameCore
 
             Velocity = nextStepVelocity(gameTime, keyboardState, gp);
 
-            if (timerAnimation > 100)
+            if (timerAnimation > 200)
             {
                 if (_texture == _textureDown)
                     _texture = _textureDown2;
@@ -198,7 +199,7 @@ namespace PolyMan.GameCore
                 }
 
                 else
-                    _speed = 6;
+                    _speed = 10;
 
             }
             catch(Exception e){

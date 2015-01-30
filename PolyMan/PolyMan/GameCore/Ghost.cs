@@ -17,9 +17,11 @@ namespace PolyMan.GameCore
     public class Ghost: SpriteDynamic
     {
         private byte idGhost;
-        private static byte nbGhost = 0;
+        public static byte nbGhost = 0;
         Texture2D fear0, fear1;
         Sommet[,] sommets;
+        int _speed = 12;
+        Random rnd;
 
         public Ghost() : base()
         {
@@ -35,18 +37,22 @@ namespace PolyMan.GameCore
                 default: Console.WriteLine("Error, too much ghost"); break;
             }
 
+            _velocity = new Vector2(0, 1);
+
+            rnd = new Random();
             Maze maze = PlayState.getMaze();
             sommets = new Sommet[maze.Height, maze.Width];
         }
 
         public override void Initialize(){
-            Maze maze = PlayState.getMaze();
+            /*Maze maze = PlayState.getMaze();
             for (int i = 0; i < maze.Height; i++)
                 for (int j = 0; j < maze.Width; j++)
                     if (! (maze.Array[i, j] is Wall))
                     {
                         sommets[i,j] = new Sommet(); 
                     }
+             */
         }
 
 
@@ -69,7 +75,13 @@ namespace PolyMan.GameCore
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gp)
         {
-            Sommet arrive, courant, depart;
+            timerUpdate += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+
+            if (timerUpdate < _speed)
+                return;
+
+            /*Sommet arrive, courant, depart;
             Vector2 currentPos = Maze.convertPixToMatrix(Position);
             Vector2 pacmanPos = Maze.convertPixToMatrix(PlayState.getPacman().Position);
             int y = (int)Math.Floor(pacmanPos.Y);
@@ -110,6 +122,57 @@ namespace PolyMan.GameCore
                         courant = sommets[i, j];
                     }
                 }
+            */
+            Vector2 currentMatPos = Maze.convertPixToMatrix(new Vector2 (Position.X, Position.Y));
+            int nbChemins = 0;
+
+            List<Vector2> tabVelo = new List<Vector2>();
+
+            Maze maze = PlayState.getMaze();
+
+            try
+            {
+                if (!(maze.Array[(int)currentMatPos.Y, (int)currentMatPos.X + 1] is Wall))
+                {
+                    nbChemins++;
+                    tabVelo.Add(new Vector2(1, 0));
+                }
+
+                if (!(maze.Array[(int)currentMatPos.Y, (int)currentMatPos.X - 1] is Wall))
+                {
+                    nbChemins++;
+                    tabVelo.Add(new Vector2(-1, 0));
+                }
+                if (!(maze.Array[(int)currentMatPos.Y + 1, (int)currentMatPos.X] is Wall))
+                {
+                    nbChemins++;
+                    tabVelo.Add(new Vector2(0, 1));
+                }
+
+                if (!(maze.Array[(int)currentMatPos.Y - 1, (int)currentMatPos.X] is Wall))
+                {
+                    nbChemins++;
+                    tabVelo.Add(new Vector2(0, -1));
+                }
+            }
+            catch{}
+
+            Vector2 remove = tabVelo.Find(x => (x.X == _velocity.X && x.Y == _velocity.Y));
+            tabVelo.Remove(remove);
+
+            if (nbChemins > 2)
+            {
+                int chemin = rnd.Next(0, tabVelo.Count);
+                Console.WriteLine(chemin);
+                _velocity = tabVelo[chemin];
+            }
+
+
+            _position = Vector2.Add(_position, _velocity);
+            _position.X = Maze.xmargin + (_position.X + gp.GameAreaWidth - Maze.xmargin) % (gp.GameAreaWidth);
+            _position.Y = (_position.Y + gp.GameAreaHeight) % gp.GameAreaHeight;
+
+            timerUpdate = 0;
 
             base.Update(gameTime, keyboardState, gp);
         }

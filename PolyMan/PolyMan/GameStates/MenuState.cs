@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using PolyMan.GameCore;
 
 namespace PolyMan.GameStates
 {
@@ -63,11 +64,17 @@ namespace PolyMan.GameStates
         {
             if (keyboardState.IsKeyDown(Keys.Enter))
             {
-                _nextGameState = PlayState.getInstance(_graphics);
-                _nextGameState.LoadContent(_content, _spriteBatch);
-            }
-                
 
+                _nextGameState = PlayState.getInstance(_graphics);
+
+                Pacman pacman = PlayState.getPacman();
+                if (pacman != null)
+                {
+                    pacman.NbPeasEat = 0;
+                }
+
+            }
+            
         }
 
         public override void Draw(GameTime gameTime, GameProperties gameProperties)

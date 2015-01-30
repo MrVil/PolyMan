@@ -67,7 +67,6 @@ namespace PolyMan.GameStates
             if (keyboardState.IsKeyDown(Keys.Back))
             {
                 _nextGameState = MenuState.getInstance(_graphics);
-                _nextGameState.LoadContent(_content, _spriteBatch);
             }
 
         }

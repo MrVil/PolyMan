@@ -46,7 +46,6 @@ namespace PolyMan.GameStates
 
         public override void Initialize()
         {
-            _nextGameState = instance;
             maze.Initialize();
             foreach(SpriteDynamic sd in entities)
                 sd.Initialize();
@@ -63,25 +62,19 @@ namespace PolyMan.GameStates
             foreach (SpriteDynamic sd in entities)
                 sd.LoadContent(content);
 
-            MediaPlayer.Play(_music);
+            //MediaPlayer.Play(_music);
         }
 
         public override void UnloadContent()
         {
             instance = null;
+            entities = null;
+            Ghost.nbGhost = 0;
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboardState, GameProperties gameProperties)
         {
             Pacman pacman = (Pacman)entities[0];
-            Console.WriteLine(pacman.NbPeasEat);
-            if (pacman.NbPeasEat >= 50)
-                _nextGameState = WinState.getInstance(_graphics);
-
-            if (keyboardState.IsKeyDown(Keys.Space)&& oldKbState.IsKeyUp(Keys.Space))
-            {
-                _nextGameState = PauseState.getInstance(_graphics);
-            }
 
             foreach (SpriteDynamic sd in entities)
                 sd.Update(gameTime, keyboardState, gameProperties);
@@ -94,12 +87,25 @@ namespace PolyMan.GameStates
             {
                 Food orange = new Food();
                 orange.LoadContent(_content);
-                maze.Array[13, 17] = orange;
+                maze.Array[17, 13] = orange;
                 orange.Position = Maze.convertMatrixToPix(new Vector2(13, 17));
+                timerBonus = -1;
             }
 
             foreach (SpriteDynamic sd in entities)
                 sd.Update(gameTime, keyboardState, gameProperties);
+
+            if (pacman.NbPeasEat >= 298)
+            {
+                this.UnloadContent();
+                _nextGameState = WinState.getInstance(_graphics);
+                gameProperties.Score = 0;
+            }
+
+            else if (keyboardState.IsKeyDown(Keys.Space) && oldKbState.IsKeyUp(Keys.Space))
+            {
+                _nextGameState = PauseState.getInstance(_graphics);
+            }
 
             oldKbState = keyboardState;
         }
@@ -107,11 +113,14 @@ namespace PolyMan.GameStates
         public override void Draw(GameTime gameTime, GameProperties gameProperties)
         {
             maze.Draw(_spriteBatch, gameTime);
-            foreach (SpriteDynamic sd in entities)
+
+            foreach (SpriteDynamic sd in entities) {
                 sd.Draw(_spriteBatch, gameTime);
+            }
 
             string score = gameProperties.Score.ToString();
             _spriteBatch.DrawString(_pixelFont, "Score : "+score, new Vector2(50, 20), Color.White);
+            _spriteBatch.DrawString(_pixelFont, "Press Space to pause", new Vector2(12, 575), Color.White);
         }
 
         public static Maze getMaze()

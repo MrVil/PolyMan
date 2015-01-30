@@ -25,7 +25,6 @@ namespace PolyMan.GameCore
 
         public virtual void Initialize()
         {
-            _velocity = Vector2.Zero;
             timerUpdate = 0;
             base.Initialize();
         }

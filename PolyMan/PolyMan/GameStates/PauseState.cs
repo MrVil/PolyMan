@@ -23,6 +23,10 @@ namespace PolyMan.GameStates
         ContentManager _content;
         private Song _music;
         private KeyboardState oldKbState;
+        private string pauseString = "Press space to resume";
+        Vector2 pressEnterSize;
+        Vector2 pressEnterCenter;
+        Vector2 pressEnterPosition;
 
         PauseState(GraphicsDeviceManager graphics)
         {
@@ -46,8 +50,6 @@ namespace PolyMan.GameStates
             _nextGameState = instance;
             maze = PlayState.getMaze();
             entities = PlayState.getEntities();
-            if (entities == null)
-                Console.WriteLine("ça chie");
  
         }
 
@@ -57,6 +59,8 @@ namespace PolyMan.GameStates
             _nextGameState = instance;
             _content = content;
             _pixelFont = content.Load<SpriteFont>("font/pixel");
+            pressEnterSize = _pixelFont.MeasureString(pauseString);
+            pressEnterCenter = new Vector2(pressEnterSize.X / 2, pressEnterSize.Y / 2);
         }
 
         public override void UnloadContent()
@@ -80,10 +84,10 @@ namespace PolyMan.GameStates
                 foreach (SpriteDynamic sd in entities)
                     sd.Draw(_spriteBatch, gameTime);
 
-            string score = gameProperties.Score.ToString();
-            _spriteBatch.DrawString(_pixelFont, "Score : " + score, new Vector2(50, 20), Color.White);
-            string _stringPause = "PAUSE \n Press Spacebar to resume game";
-            _spriteBatch.DrawString(_pixelFont, _stringPause, new Vector2(50, 20), Color.White);
+            pressEnterPosition = new Vector2(gameProperties.ScreenWidth / 2 - pressEnterCenter.X, gameProperties.ScreenHeight / 2 - pressEnterCenter.Y);
+            if (_spriteBatch != null)
+                _spriteBatch.DrawString(_pixelFont, pauseString, pressEnterPosition, Color.White);
+
         }
 
     }

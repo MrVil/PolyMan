@@ -31,7 +31,6 @@ namespace PolyMan.GameCore
 
         public virtual void Initialize()
         {
-            _position = Vector2.Zero;
         }
 
         public virtual void LoadContent(ContentManager content, string assetName)
