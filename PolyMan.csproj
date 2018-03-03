@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{22B6CFAE-4EE8-4BE2-BF5B-F807FA6CBA63}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>WindowsApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>PolyMan</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\README.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\master" />
+    <None Include=".git\logs\refs\remotes\origin\Deplacement" />
+    <None Include=".git\logs\refs\remotes\origin\master" />
+    <None Include=".git\objects\pack\pack-a6c8ce9fe0de42ca2fed6a0c3f3ecb5304cbc7b2.idx" />
+    <None Include=".git\objects\pack\pack-a6c8ce9fe0de42ca2fed6a0c3f3ecb5304cbc7b2.pack" />
+    <None Include=".git\refs\heads\master" />
+    <None Include=".git\refs\remotes\origin\Deplacement" />
+    <None Include=".git\refs\remotes\origin\master" />
+    <None Include="font\Pixel.spritefont" />
+    <None Include="PolyMan\PolyManContent\font\Pixel.spritefont" />
+    <None Include="PolyMan\PolyManContent\PolyManContent.contentproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".git\ms-persist.xml" />
+    <Content Include="img.old\barriereFantome.png" />
+    <Content Include="img.old\bean.png" />
+    <Content Include="img.old\fantomeBleu.png" />
+    <Content Include="img.old\FantomePeur0.png" />
+    <Content Include="img.old\FantomePeur1.png" />
+    <Content Include="img.old\fantomeRose.png" />
+    <Content Include="img.old\fantomeRouge.png" />
+    <Content Include="img.old\fantomeVert.png" />
+    <Content Include="img.old\fantome_cyan.png" />
+    <Content Include="img.old\fantome_orange.png" />
+    <Content Include="img.old\fantome_rose.png" />
+    <Content Include="img.old\fantome_rouge.png" />
+    <Content Include="img.old\fan_mangeable.png" />
+    <Content Include="img.old\gros_bean.png" />
+    <Content Include="img.old\Mort0.png" />
+    <Content Include="img.old\Mort1.png" />
+    <Content Include="img.old\Mort2.png" />
+    <Content Include="img.old\Mort3.png" />
+    <Content Include="img.old\mur.png" />
+    <Content Include="img.old\pacman.png" />
+    <Content Include="img.old\pacmanBas0.png" />
+    <Content Include="img.old\pacmanBas1.png" />
+    <Content Include="img.old\pacmanDroite0.png" />
+    <Content Include="img.old\pacmanDroite1.png" />
+    <Content Include="img.old\pacmanGauche0.png" />
+    <Content Include="img.old\pacmanGauche1.png" />
+    <Content Include="img.old\pacmanHaut0.png" />
+    <Content Include="img.old\pacmanHaut1.png" />
+    <Content Include="img.old\pacman_2.png" />
+    <Content Include="img.old\pacman_2f.png" />
+    <Content Include="img.old\pacman_3.png" />
+    <Content Include="img.old\pacman_3f.png" />
+    <Content Include="img.old\pacman_4.png" />
+    <Content Include="img.old\pacman_4f.png" />
+    <Content Include="img.old\pacman_f.png" />
+    <Content Include="img.test\barriereFantome.png" />
+    <Content Include="img.test\bean.png" />
+    <Content Include="img.test\fantomeBleu.png" />
+    <Content Include="img.test\FantomePeur0.png" />
+    <Content Include="img.test\FantomePeur1.png" />
+    <Content Include="img.test\fantomeRose.png" />
+    <Content Include="img.test\fantomeRouge.png" />
+    <Content Include="img.test\fantomeVert.png" />
+    <Content Include="img.test\fantome_cyan.png" />
+    <Content Include="img.test\fantome_orange.png" />
+    <Content Include="img.test\fantome_rose.png" />
+    <Content Include="img.test\fantome_rouge.png" />
+    <Content Include="img.test\fan_mangeable.png" />
+    <Content Include="img.test\gros_bean.png" />
+    <Content Include="img.test\Mort0.png" />
+    <Content Include="img.test\Mort1.png" />
+    <Content Include="img.test\Mort2.png" />
+    <Content Include="img.test\Mort3.png" />
+    <Content Include="img.test\mur.png" />
+    <Content Include="img.test\pacman.png" />
+    <Content Include="img.test\pacmanBas0.png" />
+    <Content Include="img.test\pacmanBas1.png" />
+    <Content Include="img.test\pacmanDroite0.png" />
+    <Content Include="img.test\pacmanDroite1.png" />
+    <Content Include="img.test\pacmanGauche0.png" />
+    <Content Include="img.test\pacmanGauche1.png" />
+    <Content Include="img.test\pacmanHaut0.png" />
+    <Content Include="img.test\pacmanHaut1.png" />
+    <Content Include="img.test\pacman_2.png" />
+    <Content Include="img.test\pacman_2f.png" />
+    <Content Include="img.test\pacman_3.png" />
+    <Content Include="img.test\pacman_3f.png" />
+    <Content Include="img.test\pacman_4.png" />
+    <Content Include="img.test\pacman_4f.png" />
+    <Content Include="img.test\pacman_f.png" />
+    <Content Include="img.test\pouvoir.png" />
+    <Content Include="img\barriereFantome.png" />
+    <Content Include="img\bean.png" />
+    <Content Include="img\cerise.png" />
+    <Content Include="img\fantomeBleu.png" />
+    <Content Include="img\FantomePeur0.png" />
+    <Content Include="img\FantomePeur1.png" />
+    <Content Include="img\fantomeRose.png" />
+    <Content Include="img\fantomeRouge.png" />
+    <Content Include="img\fantomeVert.png" />
+    <Content Include="img\fantome_cyan.png" />
+    <Content Include="img\fantome_orange.png" />
+    <Content Include="img\fantome_rose.png" />
+    <Content Include="img\fantome_rouge.png" />
+    <Content Include="img\fan_mangeable.png" />
+    <Content Include="img\gros_bean.png" />
+    <Content Include="img\Mort0.png" />
+    <Content Include="img\Mort1.png" />
+    <Content Include="img\Mort2.png" />
+    <Content Include="img\Mort3.png" />
+    <Content Include="img\mur.png" />
+    <Content Include="img\orange.png" />
+    <Content Include="img\pacman.png" />
+    <Content Include="img\pacmanBas0.png" />
+    <Content Include="img\pacmanBas1.png" />
+    <Content Include="img\pacmanDroite0.png" />
+    <Content Include="img\pacmanDroite1.png" />
+    <Content Include="img\pacmanGauche0.png" />
+    <Content Include="img\pacmanGauche1.png" />
+    <Content Include="img\pacmanHaut0.png" />
+    <Content Include="img\pacmanHaut1.png" />
+    <Content Include="img\pacman_2.png" />
+    <Content Include="img\pacman_2f.png" />
+    <Content Include="img\pacman_3.png" />
+    <Content Include="img\pacman_3f.png" />
+    <Content Include="img\pacman_4.png" />
+    <Content Include="img\pacman_4f.png" />
+    <Content Include="img\pacman_f.png" />
+    <Content Include="img\pouvoir.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\barriereFantome.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\bean.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantomeBleu.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\FantomePeur0.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\FantomePeur1.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantomeRose.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantomeRouge.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantomeVert.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantome_cyan.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantome_orange.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantome_rose.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fantome_rouge.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\fan_mangeable.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\gros_bean.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\Mort0.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\Mort1.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\Mort2.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\Mort3.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\mur.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanBas0.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanBas1.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanDroite0.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanDroite1.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanGauche0.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanGauche1.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanHaut0.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacmanHaut1.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_2.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_2f.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_3.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_3f.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_4.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_4f.png" />
+    <Content Include="PolyMan\PolyManContent\img.old\pacman_f.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\barriereFantome.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\bean.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantomeBleu.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\FantomePeur0.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\FantomePeur1.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantomeRose.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantomeRouge.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantomeVert.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantome_cyan.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantome_orange.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantome_rose.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fantome_rouge.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\fan_mangeable.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\gros_bean.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\Mort0.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\Mort1.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\Mort2.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\Mort3.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\mur.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanBas0.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanBas1.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanDroite0.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanDroite1.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanGauche0.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanGauche1.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanHaut0.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacmanHaut1.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_2.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_2f.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_3.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_3f.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_4.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_4f.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pacman_f.png" />
+    <Content Include="PolyMan\PolyManContent\img.test\pouvoir.png" />
+    <Content Include="PolyMan\PolyManContent\img\barriereFantome.png" />
+    <Content Include="PolyMan\PolyManContent\img\bean.png" />
+    <Content Include="PolyMan\PolyManContent\img\cerise.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantomeBleu.png" />
+    <Content Include="PolyMan\PolyManContent\img\FantomePeur0.png" />
+    <Content Include="PolyMan\PolyManContent\img\FantomePeur1.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantomeRose.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantomeRouge.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantomeVert.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantome_cyan.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantome_orange.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantome_rose.png" />
+    <Content Include="PolyMan\PolyManContent\img\fantome_rouge.png" />
+    <Content Include="PolyMan\PolyManContent\img\fan_mangeable.png" />
+    <Content Include="PolyMan\PolyManContent\img\gros_bean.png" />
+    <Content Include="PolyMan\PolyManContent\img\Mort0.png" />
+    <Content Include="PolyMan\PolyManContent\img\Mort1.png" />
+    <Content Include="PolyMan\PolyManContent\img\Mort2.png" />
+    <Content Include="PolyMan\PolyManContent\img\Mort3.png" />
+    <Content Include="PolyMan\PolyManContent\img\mur.png" />
+    <Content Include="PolyMan\PolyManContent\img\orange.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanBas0.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanBas1.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanDroite0.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanDroite1.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanGauche0.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanGauche1.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanHaut0.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacmanHaut1.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_2.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_2f.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_3.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_3f.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_4.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_4f.png" />
+    <Content Include="PolyMan\PolyManContent\img\pacman_f.png" />
+    <Content Include="PolyMan\PolyManContent\img\pouvoir.png" />
+    <Content Include="PolyMan\PolyManContent\sound\DJ Okawari - Flower Dance - 2010.mp3" />
+    <Content Include="PolyMan\PolyManContent\sound\Invincible.wav" />
+    <Content Include="PolyMan\PolyManContent\sound\MonsterEaten.wav" />
+    <Content Include="PolyMan\PolyManContent\sound\PacmanEaten.wav" />
+    <Content Include="PolyMan\PolyManContent\sound\PelletEat1.wav" />
+    <Content Include="PolyMan\PolyManContent\sound\PelletEat2.wav" />
+    <Content Include="PolyMan\PolyManContent\sound\Siren.wav" />
+    <Content Include="PolyMan\PolyMan\Game.ico" />
+    <Content Include="PolyMan\PolyMan\GameThumbnail.png" />
+    <Content Include="PolyMan\PolyMan\PolyMan.csproj" />
+    <Content Include="sound\DJ Okawari - Flower Dance - 2010.mp3" />
+    <Content Include="sound\Invincible.wav" />
+    <Content Include="sound\MonsterEaten.wav" />
+    <Content Include="sound\PacmanEaten.wav" />
+    <Content Include="sound\PelletEat1.wav" />
+    <Content Include="sound\PelletEat2.wav" />
+    <Content Include="sound\Siren.wav" />
+    <Content Include="UpgradeLog.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PolyMan\PolyMan\GameCore\Dijkstra\Coord.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Dijkstra\Sommet.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Empty.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Food.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Gate.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Ghost.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Maze.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Pacman.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Peas.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Sprite.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\SpriteDynamic.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\SuperPeas.cs" />
+    <Compile Include="PolyMan\PolyMan\GameCore\Wall.cs" />
+    <Compile Include="PolyMan\PolyMan\GameProperties.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStateHandler.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStates\DeathState.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStates\GameState.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStates\MenuState.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStates\PauseState.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStates\PlayState.cs" />
+    <Compile Include="PolyMan\PolyMan\GameStates\WinState.cs" />
+    <Compile Include="PolyMan\PolyMan\Program.cs" />
+    <Compile Include="PolyMan\PolyMan\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

@@ -2,7 +2,7 @@ using System;
 
 namespace PolyMan
 {
-#if WINDOWS || XBOX
+//#if WINDOWS || XBOX
     static class Program
     {
         /// <summary>
@@ -16,6 +16,6 @@ namespace PolyMan
             }
         }
     }
-#endif
+//#endif
 }
 
